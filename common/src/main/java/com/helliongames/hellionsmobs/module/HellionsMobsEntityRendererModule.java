@@ -1,6 +1,6 @@
 package com.helliongames.hellionsmobs.module;
 
-import com.helliongames.hellionsmobs.client.renderer.KitsuneRenderer;
+import com.helliongames.hellionsmobs.client.renderer.ArchdemonRenderer;
 import com.helliongames.hellionsmobs.registration.EntityTypeDataHolder;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
@@ -21,6 +21,6 @@ public class HellionsMobsEntityRendererModule {
 
     // Called in the mod initializer / constructor in order to make sure that items are registered
     public static void registerEntityRenderers() {
-        register(HellionsMobsEntityTypeModule.KITSUNE, KitsuneRenderer::new);
+        register(HellionsMobsEntityTypeModule.ARCHDEMON, ArchdemonRenderer::new);
     }
 }

@@ -1,7 +1,7 @@
 package com.helliongames.hellionsmobs.module;
 
 import com.helliongames.hellionsmobs.HellionsMobsCommon;
-import com.helliongames.hellionsmobs.entity.KitsuneEntity;
+import com.helliongames.hellionsmobs.entity.ArchdemonEntity;
 import com.helliongames.hellionsmobs.registration.EntityTypeDataHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.MobCategory;
@@ -13,12 +13,12 @@ public class HellionsMobsEntityTypeModule {
     /** Map of all EntityType Resource Locations to their EntityTypeDataHolders. */
     private static final Map<ResourceLocation, EntityTypeDataHolder> ENTITY_TYPE_REGISTRY = new HashMap<>();
 
-    public static final EntityTypeDataHolder<KitsuneEntity> KITSUNE = register("kitsune", EntityTypeDataHolder.of(() ->
-            EntityTypeDataHolder.Builder.of(KitsuneEntity::new, MobCategory.CREATURE)
-                    .sized(1.0f, 1.75f)
+    public static final EntityTypeDataHolder<ArchdemonEntity> ARCHDEMON = register("archdemon", EntityTypeDataHolder.of(() ->
+            EntityTypeDataHolder.Builder.of(ArchdemonEntity::new, MobCategory.MONSTER)
+                    .sized(1.0f, 3.0f)
                     .build()
             )
-            .attributes(KitsuneEntity::createKitsuneAttributes));
+            .attributes(ArchdemonEntity::createArchdemonAttributes));
 
     public static EntityTypeDataHolder register(String name, EntityTypeDataHolder entityTypeDataHolder) {
         ResourceLocation id = HellionsMobsCommon.id(name);
