@@ -16,10 +16,10 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.helliongames.hellionsmobs.HellionsMobs"
+            "com.helliongames.hellionsapi.HellionsAPI"
         ],
         "client": [
-            "com.helliongames.hellionsmobs.client.HellionsMobsClient"
+            "com.helliongames.hellionsapi.client.HellionsAPIClient"
         ]
     },
     "mixins": [
