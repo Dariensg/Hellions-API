@@ -13,7 +13,7 @@ public class EntityTypeModuleFabric {
 
     public static void registerEntities() {
 
-        for (Map.Entry<ResourceLocation, EntityTypeDataHolder> entry : HellionsMobsEntityTypeModule.getEntityTypeRegistry().entrySet()) {
+        for (Map.Entry<ResourceLocation, EntityTypeDataHolder> entry : HellionsAPIEntityTypeModule.getEntityTypeRegistry().entrySet()) {
             // Register entity type
             Registry.register(BuiltInRegistries.ENTITY_TYPE, entry.getKey(), entry.getValue().get());
 

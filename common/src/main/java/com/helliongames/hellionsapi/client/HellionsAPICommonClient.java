@@ -1,9 +1,9 @@
 package com.helliongames.hellionsapi.client;
 
-import com.helliongames.hellionsapi.module.HellionsMobsEntityRendererModule;
+import com.helliongames.hellionsapi.module.HellionsAPIEntityRendererModule;
 
 public class HellionsAPICommonClient {
     public static void init() {
-        HellionsMobsEntityRendererModule.registerEntityRenderers();
+        HellionsAPIEntityRendererModule.registerEntityRenderers();
     }
 }

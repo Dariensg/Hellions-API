@@ -1,6 +1,6 @@
 package com.helliongames.hellionsapi.client;
 
-import com.helliongames.hellionsapi.module.HellionsMobsEntityRendererModule;
+import com.helliongames.hellionsapi.module.HellionsAPIEntityRendererModule;
 import com.helliongames.hellionsapi.registration.EntityTypeDataHolder;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -16,7 +16,7 @@ public class HellionsAPIClient implements ClientModInitializer {
     }
 
     private void registerEntityRenderers() {
-        for (Map.Entry<EntityTypeDataHolder, EntityRendererProvider> entry : HellionsMobsEntityRendererModule.getEntityRendererRegistry().entrySet()) {
+        for (Map.Entry<EntityTypeDataHolder, EntityRendererProvider> entry : HellionsAPIEntityRendererModule.getEntityRendererRegistry().entrySet()) {
             // Register entity renderers
             EntityRendererRegistry.register(entry.getKey().get(), entry.getValue());
         }

@@ -68,6 +68,7 @@ public class EntityTypeDataHolder<T extends Entity> {
         private int clientTrackingRange = 5;
         private int updateInterval = 3;
         private EntityDimensions dimensions = EntityDimensions.scalable(0.6F, 1.8F);
+        private float spawnDimensionsScale = 1.0f;
         private FeatureFlagSet requiredFeatures = FeatureFlags.VANILLA_SET;
 
         private Builder(EntityType.EntityFactory<T> entityFactory, MobCategory mobCategory) {
@@ -82,6 +83,11 @@ public class EntityTypeDataHolder<T extends Entity> {
 
         public Builder<T> sized(float width, float height) {
             this.dimensions = EntityDimensions.scalable(width, height);
+            return this;
+        }
+
+        public Builder<T> spawnDimensionsScale(float scale) {
+            this.spawnDimensionsScale = scale;
             return this;
         }
 
@@ -126,7 +132,7 @@ public class EntityTypeDataHolder<T extends Entity> {
         }
 
         public EntityType<T> build() {
-            return new EntityType<>(this.factory, this.category, this.serialize, this.summon, this.fireImmune, this.canSpawnFarFromPlayer, this.immuneTo, this.dimensions, this.clientTrackingRange, this.updateInterval, this.requiredFeatures);
+            return new EntityType<>(this.factory, this.category, this.serialize, this.summon, this.fireImmune, this.canSpawnFarFromPlayer, this.immuneTo, this.dimensions, this.spawnDimensionsScale, this.clientTrackingRange, this.updateInterval, this.requiredFeatures);
         }
     }
 }
