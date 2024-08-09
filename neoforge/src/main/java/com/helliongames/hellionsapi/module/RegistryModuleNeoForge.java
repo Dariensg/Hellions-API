@@ -19,10 +19,10 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 import java.util.Map;
 
 @EventBusSubscriber(modid = "hellionsapi", bus = EventBusSubscriber.Bus.MOD)
-public class EntityTypeModuleNeoForge {
+public class RegistryModuleNeoForge {
 
     @SubscribeEvent
-    public static void registerEntityType(RegisterEvent event) {
+    public static void registerValues(RegisterEvent event) {
 
         if (event.getRegistry().equals(BuiltInRegistries.ENTITY_TYPE)) {
             for (HellionsAPIEntityHolder module : HellionsAPIEntityHolder.getModules()) {
@@ -35,7 +35,7 @@ public class EntityTypeModuleNeoForge {
             }
         } else if (event.getRegistry().equals(BuiltInRegistries.ITEM)) {
             for (HellionsAPIItemHolder module : HellionsAPIItemHolder.getModules()) {
-                for (Map.Entry<ResourceLocation, ItemDataHolder> entry : module.getItemRegistry().entrySet()) {
+                for (Map.Entry<ResourceLocation, ItemDataHolder<?>> entry : module.getItemRegistry().entrySet()) {
                     // Register item
                     event.register(Registries.ITEM, itemRegistryHelper ->
                             itemRegistryHelper.register(entry.getKey(), entry.getValue().get())
@@ -44,11 +44,18 @@ public class EntityTypeModuleNeoForge {
             }
         } else if (event.getRegistry().equals(BuiltInRegistries.BLOCK)) {
             for (HellionsAPIBlockHolder module : HellionsAPIBlockHolder.getModules()) {
-                for (Map.Entry<ResourceLocation, BlockDataHolder> entry : module.getBlockRegistry().entrySet()) {
+                for (Map.Entry<ResourceLocation, BlockDataHolder<?>> entry : module.getBlockRegistry().entrySet()) {
                     // Register block
                     event.register(Registries.BLOCK, blockRegistryHelper ->
                             blockRegistryHelper.register(entry.getKey(), entry.getValue().get())
                     );
+
+                    // Register the block items
+                    if (entry.getValue().hasItem()) {
+                        event.register(Registries.ITEM, itemRegistryHelper ->
+                                itemRegistryHelper.register(entry.getKey(), entry.getValue().getBlockItem().get())
+                        );
+                    }
                 }
             }
         }

@@ -18,26 +18,25 @@ public class HellionsAPIItemHolder {
         MODULES.add(this);
     }
 
-    /** Map of all EntityType Resource Locations to their EntityTypeDataHolders. */
-    private final Map<ResourceLocation, ItemDataHolder> ITEM_REGISTRY = new HashMap<>();
+    /** Map of all Item Resource Locations to their ItemDataHolders. */
+    private final Map<ResourceLocation, ItemDataHolder<?>> ITEM_REGISTRY = new HashMap<>();
 
-    /**
-     public static final HellionsAPIItemHolder ITEM_MODULE = new HellionsAPIItemHolder("examplemod");
+    /*
+    public static final HellionsAPIItemHolder ITEM_MODULE = new HellionsAPIItemHolder("examplemod");
 
-     public static final ItemDataHolder EXAMPLE_ITEM = ITEM_MODULE.register("example_item", ItemDataHolder.of(() ->
-         ItemDataHolder.Builder.of()
-         .stacksTo(16)
-         .build()
-     ));
-     **/
+    public static final ItemDataHolder<Item> EXAMPLE_ITEM = ITEM_MODULE.register("example_item", ItemDataHolder.of(() ->
+            ItemDataHolder.Builder.of(ExampleItem::new, new Item.Properties().stacksTo(16))
+                    .build()
+    ));
+    */
 
-    public ItemDataHolder register(String name, ItemDataHolder itemDataHolder) {
+    public ItemDataHolder<?> register(String name, ItemDataHolder<?> itemDataHolder) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(this.modid, name);
         this.ITEM_REGISTRY.put(id, itemDataHolder);
         return itemDataHolder;
     }
 
-    public Map<ResourceLocation, ItemDataHolder> getItemRegistry() {
+    public Map<ResourceLocation, ItemDataHolder<?>> getItemRegistry() {
         return this.ITEM_REGISTRY;
     }
 
