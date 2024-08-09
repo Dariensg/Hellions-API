@@ -21,7 +21,7 @@ public class HellionsAPIEntityHolder {
     /** Map of all EntityType Resource Locations to their EntityTypeDataHolders. */
     private final Map<ResourceLocation, EntityTypeDataHolder> ENTITY_TYPE_REGISTRY = new HashMap<>();
 
-    /**
+    /*
      public static final HellionsAPIEntityHolder ENTITY_TYPE_MODULE = new HellionsAPIEntityHolder("examplemod");
 
      public static final EntityTypeDataHolder<ExampleEntity> EXAMPLE = ENTITY_TYPE_MODULE.register("example", EntityTypeDataHolder.of(() ->
@@ -30,7 +30,7 @@ public class HellionsAPIEntityHolder {
                             .build()
             )
             .attributes(ExampleEntity::createExampleEntityAttributes));
-    **/
+    */
 
     public EntityTypeDataHolder register(String name, EntityTypeDataHolder entityTypeDataHolder) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(this.modid, name);
