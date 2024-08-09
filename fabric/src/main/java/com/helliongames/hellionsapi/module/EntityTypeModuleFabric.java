@@ -12,15 +12,16 @@ import java.util.Map;
 public class EntityTypeModuleFabric {
 
     public static void registerEntities() {
+        for (HellionsAPIEntityTypeModule module : HellionsAPIEntityTypeModule.getModules()) {
+            for (Map.Entry<ResourceLocation, EntityTypeDataHolder> entry : module.getEntityTypeRegistry().entrySet()) {
+                // Register entity type
+                Registry.register(BuiltInRegistries.ENTITY_TYPE, entry.getKey(), entry.getValue().get());
 
-        for (Map.Entry<ResourceLocation, EntityTypeDataHolder> entry : HellionsAPIEntityTypeModule.getEntityTypeRegistry().entrySet()) {
-            // Register entity type
-            Registry.register(BuiltInRegistries.ENTITY_TYPE, entry.getKey(), entry.getValue().get());
-
-            // Register entity attributes, if present
-            if (entry.getValue().hasAttributes()) {
-                AttributeSupplier.Builder attributesBuilder = (AttributeSupplier.Builder) entry.getValue().getAttributesSupplier().get();
-                FabricDefaultAttributeRegistry.register(entry.getValue().get(), attributesBuilder);
+                // Register entity attributes, if present
+                if (entry.getValue().hasAttributes()) {
+                    AttributeSupplier.Builder attributesBuilder = (AttributeSupplier.Builder) entry.getValue().getAttributesSupplier().get();
+                    FabricDefaultAttributeRegistry.register(entry.getValue().get(), attributesBuilder);
+                }
             }
         }
     }

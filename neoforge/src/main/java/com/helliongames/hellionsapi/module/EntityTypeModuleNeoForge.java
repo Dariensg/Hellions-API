@@ -17,26 +17,29 @@ public class EntityTypeModuleNeoForge {
 
     @SubscribeEvent
     public static void registerEntityType(RegisterEvent event) {
-        for (Map.Entry<ResourceLocation, EntityTypeDataHolder> entry : HellionsAPIEntityTypeModule.getEntityTypeRegistry().entrySet()) {
-            // Register entity type
-            event.register(Registries.ENTITY_TYPE, entityTypeRegisterHelper ->
-                    entityTypeRegisterHelper.register(entry.getKey(), entry.getValue().get())
-            );
+        for (HellionsAPIEntityTypeModule module : HellionsAPIEntityTypeModule.getModules()) {
+            for (Map.Entry<ResourceLocation, EntityTypeDataHolder> entry : module.getEntityTypeRegistry().entrySet()) {
+                // Register entity type
+                event.register(Registries.ENTITY_TYPE, entityTypeRegisterHelper ->
+                        entityTypeRegisterHelper.register(entry.getKey(), entry.getValue().get())
+                );
+            }
         }
-
     }
 
     @SubscribeEvent
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
-        for (Map.Entry<ResourceLocation, EntityTypeDataHolder> entry : HellionsAPIEntityTypeModule.getEntityTypeRegistry().entrySet()) {
-            // Register entity attributes
+        for (HellionsAPIEntityTypeModule module : HellionsAPIEntityTypeModule.getModules()) {
+            for (Map.Entry<ResourceLocation, EntityTypeDataHolder> entry : module.getEntityTypeRegistry().entrySet()) {
+                // Register entity attributes
 
-            AttributeSupplier.Builder builder = (AttributeSupplier.Builder) entry.getValue().getAttributesSupplier().get();
-            // Attach required Forge attributes and register
-            builder.add(NeoForgeMod.SWIM_SPEED)
-                    .add(NeoForgeMod.NAMETAG_DISTANCE);
+                AttributeSupplier.Builder builder = (AttributeSupplier.Builder) entry.getValue().getAttributesSupplier().get();
+                // Attach required Forge attributes and register
+                builder.add(NeoForgeMod.SWIM_SPEED)
+                        .add(NeoForgeMod.NAMETAG_DISTANCE);
 
-            event.put(entry.getValue().get(), builder.build());
+                event.put(entry.getValue().get(), builder.build());
+            }
         }
     }
 }
