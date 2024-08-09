@@ -1,5 +1,6 @@
 package com.helliongames.hellionsapi.module;
 
+import com.helliongames.hellionsapi.holders.HellionsAPIEntityHolder;
 import com.helliongames.hellionsapi.registration.EntityTypeDataHolder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.Registry;
@@ -12,7 +13,7 @@ import java.util.Map;
 public class EntityTypeModuleFabric {
 
     public static void registerEntities() {
-        for (HellionsAPIEntityTypeModule module : HellionsAPIEntityTypeModule.getModules()) {
+        for (HellionsAPIEntityHolder module : HellionsAPIEntityHolder.getModules()) {
             for (Map.Entry<ResourceLocation, EntityTypeDataHolder> entry : module.getEntityTypeRegistry().entrySet()) {
                 // Register entity type
                 Registry.register(BuiltInRegistries.ENTITY_TYPE, entry.getKey(), entry.getValue().get());

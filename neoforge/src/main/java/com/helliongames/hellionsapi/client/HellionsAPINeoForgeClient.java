@@ -1,6 +1,6 @@
 package com.helliongames.hellionsapi.client;
 
-import com.helliongames.hellionsapi.module.HellionsAPIEntityRendererModule;
+import com.helliongames.hellionsapi.holders.HellionsAPIEntityRendererHolder;
 import com.helliongames.hellionsapi.registration.EntityTypeDataHolder;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.neoforged.bus.api.IEventBus;
@@ -21,7 +21,7 @@ public class HellionsAPINeoForgeClient {
     }
 
     private static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        for (Map.Entry<EntityTypeDataHolder, EntityRendererProvider> entry : HellionsAPIEntityRendererModule.getEntityRendererRegistry().entrySet()) {
+        for (Map.Entry<EntityTypeDataHolder, EntityRendererProvider> entry : HellionsAPIEntityRendererHolder.getEntityRendererRegistry().entrySet()) {
             // Register entity renderers
             event.registerEntityRenderer(entry.getKey().get(), entry.getValue());
         }
